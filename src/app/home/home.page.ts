@@ -32,7 +32,7 @@ export class HomePage implements OnInit {
       this.id = params.get('id')
       if (this.id !== null){
         console.log('Es un uuid correcto?: ',this.isUUID(this.id))
-        this.httpClient.get(`${environment.api}/views/card/${this.id}`).subscribe( {
+        this.httpClient.get(`http://10.10.10.238:8081/views/card/${this.id}`).subscribe( {
           next: (card: any) => {
             this.card = card
             this.isCardLoad = true
