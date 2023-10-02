@@ -1,0 +1,7 @@
+{
+  "name": "slird-landing",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
