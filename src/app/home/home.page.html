@@ -1,10 +1,12 @@
 <ion-content [fullscreen]="true">
 
   <div *ngIf="isCardLoad" >
-    <ion-img class="image--margin-top" [src]="'http://10.10.10.238:8081' +'/templates?templateKey='+card!.templateKey+'&type=front'"></ion-img>
+    <ion-img class="image--margin-top" [src]="urlPrefix +'/templates?templateKey='+card!.templateKey+'&type=front'"></ion-img>
 
-    <div class="info-container">
-
+    <div class="info-container" >
+      <div class="info-item" *ngFor="let field of fields">
+        {{field.value}}
+      </div>
     </div>
 
     <div class="footer-button">

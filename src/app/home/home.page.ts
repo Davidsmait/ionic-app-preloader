@@ -10,6 +10,12 @@ interface ApiCard {
   templateKey: string,
 }
 
+interface ApiField {
+  cardKey: string,
+  name: string,
+  value: string
+}
+
 
 @Component({
   selector: 'app-home',
@@ -21,6 +27,7 @@ export class HomePage implements OnInit {
   id : string | null | undefined = 'b3eb83f8-2aa8-40f2-ad16-bd6a74983375'
   urlPrefix = environment.api
   isCardLoad = false
+  fields : ApiField | any
 
   constructor(
     private httpClient:HttpClient,
@@ -28,34 +35,42 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    // this.route.paramMap.subscribe(params => {
-    //   this.id = params.get('id')
-    //   if (this.id !== null){
-    //     console.log('Es un uuid correcto?: ',this.isUUID(this.id))
-    //     this.httpClient.get(`http://10.10.10.238:8081/views/card/${this.id}`).subscribe( {
-    //       next: (card: any) => {
-    //         this.card = card
-    //         this.isCardLoad = true
-    //       },
-    //       error: (err:any) => {
-    //         console.log(err)
-    //       }
-    //     })
-    //   }
-    //
-    //   console.log("id: ",this.id)
-    // })
+    this.route.paramMap.subscribe(params => {
+      this.id = params.get('id')
+      if (this.id !== null){
+        console.log('Es un uuid correcto?: ',this.isUUID(this.id))
+        this.httpClient.get(`${environment.api}/views/card/${this.id}`).subscribe( {
+          next: (card: any) => {
+            this.card = card
+            this.isCardLoad = true
+            console.log("Card: ", card)
+          },
+          error: (err:any) => {
+            console.log(err)
+          }
+        })
+      }
 
-    this.httpClient.get(`http://10.10.10.238:8081/views/card/${this.id}`).subscribe( {
-      next: (card: any) => {
-        console.log("Esta es la tarjeta: ", card)
-        this.card = card
-        this.isCardLoad = true
-      },
-      error: (err:any) => {
-        console.log(err)
+      console.log("id: ",this.id)
+    })
+
+    this.httpClient.get(`${environment.api}/views/card/${this.id}/fields`).subscribe( {
+      next: (fields) => {
+        this.fields = fields
+        console.log("Fields: ",this.fields)
       }
     })
+
+    // this.httpClient.get(`http://10.10.10.238:8081/views/card/${this.id}`).subscribe( {
+    //   next: (card: any) => {
+    //     console.log("Esta es la tarjeta: ", card)
+    //     this.card = card
+    //     this.isCardLoad = true
+    //   },
+    //   error: (err:any) => {
+    //     console.log(err)
+    //   }
+    // })
 
   }
 
