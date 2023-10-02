@@ -1,20 +1,29 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div *ngIf="isCardLoad" >
+    <ion-img class="image--margin-top" [src]="urlPrefix +'/templates?templateKey='+card!.templateKey+'&type=front'"></ion-img>
+
+    <div class="info-container">
+
+    </div>
+
+    <div class="footer-button">
+      <ion-grid>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="3" class="logo-container">
+            <ion-img class="logo" src="../assets/icon/logo.png"></ion-img>
+            Slird
+          </ion-col>
+          <ion-col size="9">
+            <div class="footer-call-container">
+              <div class="footer-title">Guardar contacto</div>
+              <div class="footer-paragraph">Si aún no tienes la app descargala aquí</div>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </div>
+
   </div>
 </ion-content>
