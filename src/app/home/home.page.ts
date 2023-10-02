@@ -28,22 +28,33 @@ export class HomePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.id = params.get('id')
-      if (this.id !== null){
-        console.log('Es un uuid correcto?: ',this.isUUID(this.id))
-        this.httpClient.get(`http://10.10.10.238:8081/views/card/${this.id}`).subscribe( {
-          next: (card: any) => {
-            this.card = card
-            this.isCardLoad = true
-          },
-          error: (err:any) => {
-            console.log(err)
-          }
-        })
-      }
+    // this.route.paramMap.subscribe(params => {
+    //   this.id = params.get('id')
+    //   if (this.id !== null){
+    //     console.log('Es un uuid correcto?: ',this.isUUID(this.id))
+    //     this.httpClient.get(`http://10.10.10.238:8081/views/card/${this.id}`).subscribe( {
+    //       next: (card: any) => {
+    //         this.card = card
+    //         this.isCardLoad = true
+    //       },
+    //       error: (err:any) => {
+    //         console.log(err)
+    //       }
+    //     })
+    //   }
+    //
+    //   console.log("id: ",this.id)
+    // })
 
-      console.log("id: ",this.id)
+    this.httpClient.get(`http://10.10.10.238:8081/views/card/${this.id}`).subscribe( {
+      next: (card: any) => {
+        console.log("Esta es la tarjeta: ", card)
+        this.card = card
+        this.isCardLoad = true
+      },
+      error: (err:any) => {
+        console.log(err)
+      }
     })
 
   }
